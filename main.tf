@@ -15,6 +15,39 @@ data "sops_file" "google-cloud-key" {
   source_file = "google-cloud-key.sops.json"
 }
 
+resource "google_compute_firewall" "allow-icmp" {
+  name    = "allow-icmp"
+  network = google_compute_network.vpc_network.name
+  source_ranges = ["0.0.0.0/0"]
+  allow {
+    protocol = "icmp"
+  }
+}
+resource "google_compute_firewall" "allow-ssh" {
+  name    = "allow-ssh"
+  network = google_compute_network.vpc_network.name
+  source_ranges = ["0.0.0.0/0"]
+  allow {
+    protocol = "tcp"
+    ports    = ["22"]
+  }
+}
+
+resource "google_compute_firewall" "minecraft" {
+  name    = "minecraft-default"
+  network = google_compute_network.vpc_network.name
+  source_ranges = ["0.0.0.0/0"]
+  allow {
+    protocol = "tcp"
+    ports    = ["25565"]
+  }
+}
+
+resource "google_compute_address" "saba" {
+  name = "saba-address"
+  address_type = "EXTERNAL"
+}
+
 provider "google" {
   credentials = data.sops_file.google-cloud-key.raw
 
@@ -43,6 +76,7 @@ resource "google_compute_instance" "saba" {
   network_interface {
     network = google_compute_network.vpc_network.name
     access_config {
+      nat_ip = google_compute_address.saba.address
     }
   }
 }

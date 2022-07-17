@@ -1,0 +1,33 @@
+minecraft_rcon_password: ENC[AES256_GCM,data:lmwmtB/SKUWhYHA6l0strKGpaMk7cN0=,iv:pqyjHCPtcouXojn7JVpsW8l5amsRRwxtvj8vcR2QpW0=,tag:mgdWDizWIPSi6WvnbW6fVw==,type:str]
+telegram_bot_token: ENC[AES256_GCM,data:QQBuvwcGKM/Q6yVW2P1sCxQNwF6NZo7Uv1JQyUDBOh2YmKogSZngdIiIj+jC,iv:9HaZl6sZrFoUO8sWVBrEm24d5Dknu/3SUfEZrAo4KRw=,tag:LPYR2paTEzaqHiBadPPhxg==,type:str]
+sops:
+    kms: []
+    gcp_kms: []
+    azure_kv: []
+    hc_vault: []
+    age: []
+    lastmodified: "2022-07-17T18:38:06Z"
+    mac: ENC[AES256_GCM,data:kOvFn/I7CCl/uJyzr2lGDWvfdId055iKR1HaI+Zij8E2Z0kctNcbYkPidFKzoKADGDKaHp793fEQcFj8Zxd4iCp7mb40VSL/kdqLo4pS4BTglFTY8kj0JJ3V1PFsUrUiEMcexnHNtXZ4TJuykhrrygQtM9gCo1agKPbfrsT2R9c=,iv:pw+8M7VHfMb6n8iBnBBjLlHSz9r9kfxoCMvl7wClrrg=,tag:hUz3QYXchWGmfEenVoh71Q==,type:str]
+    pgp:
+        - created_at: "2022-07-17T18:38:05Z"
+          enc: |-
+            -----BEGIN PGP MESSAGE-----
+
+            wcFMA7LF3mkfbQTxARAAxhajLyyBZZZ20eFjg7YUKSrAVSl1sahqQDyOFxiIb8/o
+            PIsw7ZgLWrEtLIfKTfDFdNje9Qv4v9SeP0NIJ3b5Z7bZBqEffPtH+Pv//QR91Q56
+            xRBcD0qL+HV4TPMLnxPNs7pYGWEuMG3zCN/0TABIJH2hdeqmn/S3Ffzi8ZwAUDd3
+            cXYrJq12EukCycm1rigDnBf0+qS95rEDdLaplCpALHS1EwKBgqzAhO+4e0Uxpj7V
+            16/RdemjelyK++gBOwyA6Ge7ykZ5YyB6ozkzX89Q7VwL0ETeiD5CPDUcpgYCiA+m
+            eECsv13rt5ykOWsE4mf8cRpbvbcf3EXJRp3CjAz+SxhSs/glOjYzuGpspfuspBm+
+            Fb2rcQ5iPLfmQ+d7QMhAGg+tSYblWfin/rvvKUZXQDhNIlBrn9SguyAtEeK1kO+F
+            WIPaH/CN9GPcoOoDHNrzcSApQsoObVG/KSA6b0o7tVcqZ8ZIcEKcpEybiDhTWyuG
+            N5lK7dauQFEguGWZ4nSKmfVYx0jQlnEmud6y0jPGDMH1dRZSxbqClB/eZjyCRY/i
+            0ewFkvKypB/QqPOhhOGtz2kruY9sYOY+7pZ31bT4Suh5kRkz8Sz2UI9c8BTu6RqQ
+            MPdmjZpuMb0Qc0ZYl31nzc+M3SbjXsuxVmkbXNO7uYzy+leQQzX2CK/iqqF16MrS
+            UQERaaMUZ1nANTHsWgsfw/7gTOOxXZvIm0rMy08Lxot9cy8knt/5+MK3XGGRe0VH
+            BHili2RLI8qa8vWUMHi7A8YmToIdaplIHlXWEn6vqcHnoA==
+            =+2qv
+            -----END PGP MESSAGE-----
+          fp: FFF6DDE2181C1F55E8885470C02D23F17563AA95
+    unencrypted_suffix: _unencrypted
+    version: 3.7.3

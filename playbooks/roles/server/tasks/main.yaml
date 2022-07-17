@@ -1,0 +1,72 @@
+---
+- name: Install prerequisites
+  become: yes
+  apt:
+    name:
+      - git
+      - acl
+      - tmux
+      - screen
+      - openjdk-18-jdk-headless
+
+- name: minecraft user
+  become: yes
+  user:
+    name: minecraft
+    shell: /bin/bash
+
+- name: Copy eula.txt
+  become: yes
+  copy:
+    src: eula.txt
+    dest: /home/minecraft/eula.txt
+    owner: minecraft
+    group: minecraft
+
+- name: Copy server icon
+  become: yes
+  copy:
+    src: server-icon.png
+    dest: /home/minecraft/server-icon.png
+    owner: minecraft
+    group: minecraft
+
+- name: Generate server.properties
+  become: yes
+  template:
+    src: server.properties.j2
+    dest: /home/minecraft/server.properties
+    owner: minecraft
+    group: minecraft
+
+- name: Copy start.sh
+  become: yes
+  copy:
+    src: start.sh
+    dest: /home/minecraft/start.sh
+    mode: '0744'
+    owner: minecraft
+    group: minecraft
+
+- name: Download server
+  become: yes
+  become_user: minecraft
+  get_url:
+    url: '{{minecraft_server_url}}'
+    dest: '/home/minecraft/server.jar'
+    checksum: sha256:deefd056f0cf89c3d7fd48d03f56a8a73943586e8c061fdabd0fd92d32ced2b2
+
+- name: Copy minecraft.service
+  become: yes
+  copy:
+    src: minecraft.service
+    dest: /usr/lib/systemd/system/minecraft.service
+
+
+- name: Enable minecraft server service
+  become: yes
+  systemd:
+    state: started
+    enabled: yes
+    name: minecraft
+    daemon_reload: yes

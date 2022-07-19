@@ -1,0 +1,29 @@
+- name: Copy nixos configuration
+  become: yes
+  copy:
+    src: configuration.nix
+    dest: /etc/nixos/configuration.nix
+    mode: 0600
+    owner: root
+    group: root
+  notify:
+    - Switch system configuration
+
+
+- name: Copy server icon
+  become: yes
+  copy:
+    src: server-icon.png
+    dest: '{{ minecraft_data_path }}/server-icon.png'
+    owner: minecraft
+    group: minecraft
+
+- name: Generate server.properties
+  become: yes
+  template:
+    src: server.properties.j2
+    dest: '{{ minecraft_data_path }}/server.properties'
+    owner: minecraft
+    group: minecraft
+  notify:
+    - Restart minecraft server

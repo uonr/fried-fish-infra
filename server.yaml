@@ -1,4 +1,4 @@
 ---
-- hosts: minecraft
+- hosts: all
   roles:
     - server

@@ -19,7 +19,6 @@ resource "google_compute_firewall" "minecraft" {
   name          = "minecraft-default"
   network       = "default"
   source_ranges = ["0.0.0.0/0"]
-  source_tags   = ["minecraft"]
   allow {
     protocol = "tcp"
     ports    = ["25565"]

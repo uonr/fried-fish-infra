@@ -1,0 +1,9 @@
+- name: Restart minecraft server
+  become: yes
+  ansible.builtin.service:
+    name: minecraft-server
+    state: restarted
+
+- name: Switch system configuration
+  become: yes
+  command: nixos-rebuild switch

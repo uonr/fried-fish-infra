@@ -7,3 +7,9 @@ variable "region" {
 variable "zone" {
   default = "asia-northeast1-b"
 }
+
+variable "username" {
+}
+
+variable "ssh_key_pub" {
+}

@@ -1,11 +1,11 @@
 terraform {
   required_providers {
     google = {
-      source = "hashicorp/google"
+      source  = "hashicorp/google"
       version = "4.28.0"
     }
     sops = {
-      source = "carlpett/sops"
+      source  = "carlpett/sops"
       version = "~> 0.7"
     }
   }
@@ -15,17 +15,29 @@ data "sops_file" "google-cloud-key" {
   source_file = "google-cloud-key.sops.json"
 }
 
+resource "google_storage_bucket" "nixos" {
+  name                        = "nixos-image-uonr"
+  location                    = "ASIA-NORTHEAST1"
+  force_destroy               = true
+  uniform_bucket_level_access = true
+  storage_class               = "STANDARD"
+}
+resource "google_storage_bucket_iam_member" "member" {
+  bucket = google_storage_bucket.nixos.name
+  role   = "roles/storage.objectViewer"
+  member = "allUsers"
+}
 resource "google_compute_firewall" "allow-icmp" {
-  name    = "allow-icmp"
-  network = google_compute_network.vpc_network.name
+  name          = "allow-icmp"
+  network       = google_compute_network.vpc_network.name
   source_ranges = ["0.0.0.0/0"]
   allow {
     protocol = "icmp"
   }
 }
 resource "google_compute_firewall" "allow-ssh" {
-  name    = "allow-ssh"
-  network = google_compute_network.vpc_network.name
+  name          = "allow-ssh"
+  network       = google_compute_network.vpc_network.name
   source_ranges = ["0.0.0.0/0"]
   allow {
     protocol = "tcp"
@@ -34,8 +46,8 @@ resource "google_compute_firewall" "allow-ssh" {
 }
 
 resource "google_compute_firewall" "minecraft" {
-  name    = "minecraft-default"
-  network = google_compute_network.vpc_network.name
+  name          = "minecraft-default"
+  network       = google_compute_network.vpc_network.name
   source_ranges = ["0.0.0.0/0"]
   allow {
     protocol = "tcp"
@@ -44,8 +56,11 @@ resource "google_compute_firewall" "minecraft" {
 }
 
 resource "google_compute_address" "saba" {
-  name = "saba-address"
+  name         = "saba-address"
   address_type = "EXTERNAL"
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 provider "google" {
@@ -68,8 +83,8 @@ resource "google_compute_instance" "saba" {
   boot_disk {
     initialize_params {
       image = "ubuntu-minimal-2204-lts"
-      type = "pd-ssd"
-      size = 16
+      type  = "pd-ssd"
+      size  = 16
     }
   }
 

@@ -1,4 +1,4 @@
-variable "project" { }
+variable "project" {}
 
 variable "region" {
   default = "asia-northeast1"
